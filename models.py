@@ -1,31 +1,9 @@
-"""
-models.py
-
-Definisce le due reti neurali convoluzionali 3D usate nel progetto:
-
-    - TriConvNet: rete completa con 6 layer convoluzionali,
-      2 layer di upsample (scale factor 2) e 3 layer fully connected.
-      Struttura ispirata a:
-      https://github.com/xmuyzz/3D-CNN-PyTorch/blob/master/models/C3DNet.py
-
-    - TriConvNet2: versione semplificata di TriConvNet, con
-      4 layer convoluzionali e 2 layer fully connected.
-"""
 
 import torch
 import torch.nn as nn
 
 
 class TriConvNet(nn.Module):
-    """
-    Rete 3D-CNN completa.
-
-    Struttura:
-        - 6 layer convoluzionali (alcuni seguiti da max pooling)
-        - 2 layer di upsample con scale_factor=2
-        - 3 layer fully connected
-    """
-
     def __init__(self, num_classes=2):
         super(TriConvNet, self).__init__()
 
@@ -118,23 +96,11 @@ class TriConvNet(nn.Module):
         return x
 
     def scale(self, n1):
-        """
-        Calcola la scala (numero di parametri complessivi) della rete,
-        utile in fase di debug per verificare la dimensione del modello.
-        """
         total_params = sum(p.numel() for p in self.parameters())
         return total_params * n1
 
 
 class TriConvNet2(nn.Module):
-    """
-    Versione semplificata di TriConvNet.
-
-    Struttura:
-        - 4 layer convoluzionali
-        - 2 layer fully connected
-    """
-
     def __init__(self, num_classes=2):
         super(TriConvNet2, self).__init__()
 
