@@ -1,8 +1,6 @@
 # MRI Autism Classification — 3D CNN
 
-University project developed for the **Artificial Intelligence course (2022/2023)**.
 
-**Authors:**  Giulia Avanzato (70/90/00356), Samuele Capacci (70/90/00341)
 
 ## Description
 
