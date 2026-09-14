@@ -1,11 +1,3 @@
-"""
-main.py
-
-Script principale del progetto. Genera il file di label, crea gli
-split train/test del dataset, istanzia i DataLoader (batch size 32) e
-allena entrambe le reti (TriConvNet e TriConvNet2), stampando i
-risultati ottenuti.
-"""
 
 import torch
 import torch.nn as nn
