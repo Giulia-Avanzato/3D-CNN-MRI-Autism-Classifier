@@ -1,41 +1,7 @@
-"""
-trainings.py
-
-Contiene:
-    - train_and_save: allena una rete per un numero specificato di
-      epoche, con il criterion e l'optimizer indicati, valutandola ad
-      ogni epoca sul test loader e salvando (opzionalmente) i pesi
-      che ottengono la miglior accuracy.
-    - check_accuracy: calcola l'accuracy di una rete confrontando le
-      predizioni con le label reali.
-
-Implementazione basata sul tutorial ufficiale PyTorch
-"Training a classifier":
-https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
-"""
-
 import torch
 
 
 def check_accuracy(net, loader, device="cpu"):
-    """
-    Calcola l'accuracy della rete sul DataLoader fornito, confrontando
-    la classe predetta con la label reale.
-
-    Parameters
-    ----------
-    net : torch.nn.Module
-        Rete da valutare.
-    loader : torch.utils.data.DataLoader
-        DataLoader contenente i dati su cui valutare l'accuracy.
-    device : str
-        Device su cui eseguire i calcoli ("cpu" o "cuda").
-
-    Returns
-    -------
-    float
-        Accuracy percentuale (0-100).
-    """
     net.eval()
     correct = 0
     total = 0
@@ -58,39 +24,6 @@ def check_accuracy(net, loader, device="cpu"):
 def train_and_save(net, epochs, criterion, optimizer, train_loader,
                     test_loader, save_path=None, device="cpu",
                     verbose=True):
-    """
-    Allena la rete `net` per `epochs` epoche usando `criterion` e
-    `optimizer`, valutando l'accuracy ad ogni epoca su `test_loader`.
-    Se `save_path` è specificato, salva i pesi della rete ogni volta
-    che viene raggiunta una nuova miglior accuracy.
-
-    Parameters
-    ----------
-    net : torch.nn.Module
-        Rete da allenare.
-    epochs : int
-        Numero di epoche di training.
-    criterion : callable
-        Funzione di loss (es. nn.CrossEntropyLoss()).
-    optimizer : torch.optim.Optimizer
-        Optimizer da usare per l'aggiornamento dei pesi.
-    train_loader : torch.utils.data.DataLoader
-        DataLoader per il training set.
-    test_loader : torch.utils.data.DataLoader
-        DataLoader per il test set, usato per valutare l'accuracy.
-    save_path : str o None
-        Percorso dove salvare i pesi migliori. Se None, non salva.
-    device : str
-        Device su cui eseguire il training ("cpu" o "cuda").
-    verbose : bool
-        Se stampare a video loss e accuracy ad ogni epoca.
-
-    Returns
-    -------
-    dict
-        Dizionario con le liste 'loss' e 'accuracy' registrate ad ogni
-        epoca, e 'best_accuracy' con il valore massimo raggiunto.
-    """
     net.to(device)
     best_accuracy = 0.0
     history = {"loss": [], "accuracy": []}
